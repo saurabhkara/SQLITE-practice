@@ -103,3 +103,34 @@ sqlite> .mode csv
 sqlite> .once C:\Users\skara\Desktop\sqlite3Learning\abc.csv
 sqlite> SELECT * FROM EMPLOYEE;
 ```
+
+### ALTER(Update) table name or colum or Add colum
+
+- `.tables` to see the table name
+- `ALTER TABLE Table_Name RENAME TO New_Table_Name;` to rename table name
+
+```
+sqlite> .tables
+EMPLOYEE
+sqlite> ALTER TABLE EMPLOYEE RENAME TO Employee_List;
+sqlite> .tables
+Employee_List
+```
+
+- `.schema` to see the table details
+- `ALTER TABLE Table_Name ADD COLUMN column_name DataType;`
+
+```
+.schema Employee_List
+CREATE TABLE IF NOT EXISTS "Employee_List"(empId INT,empName TEXT,empAge INT, salary REAL);
+
+sqlite> ALTER TABLE Employee_List ADD COLUMN deptId INT;
+sqlite> SELECT * FROM Employee_List;
+empId,empName,empAge,salary,deptId
+1,Saurabh,28,90000.0,
+2,ANKIT,26,20000.0,
+4,HARI,21,15000.0,
+
+UPDATE Employee_List SET deptId=1001 WHERE empId<=4;
+
+```
