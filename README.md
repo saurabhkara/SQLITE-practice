@@ -134,3 +134,89 @@ empId,empName,empAge,salary,deptId
 UPDATE Employee_List SET deptId=1001 WHERE empId<=4;
 
 ```
+
+### JOIN
+
+A JOIN combines rows from two or more tables based on a related column between them.
+
+Why JOIN
+
+- To retrieve meaningful data spread across multiple tables.
+- To avoid data duplication (normalization).
+- To enforce relationships between tables.
+
+### INNER JOIN
+
+Returns records where there is a match in both tables.
+
+- `SELECT E.EmpId, E.eName, E.salary, D.dName FROM Employee_List E INNER JOIN Department_List D ON E.departId = D.deptId `
+
+```
+sqlite> SELECT E.eName, E.empId, D.dname FROM Employee_List E INNER JOIN Department_List D ON E.departId= D.deptId;
+
+
+saurabh|1|IT
+sneha|2|IT
+sneha|3|HR
+```
+
+### LEFT JOIN
+
+Returns all rows from the left table, even if there’s no match in the right table.
+If no match, columns from the right table will be NULL.
+
+- `SELECT E.empId, E.empName, E.salary, D.dname FROM Employee_List E LEFT JOIN Department_List ON E.departId = D.deptId;`
+
+```
+sqlite> SELECT E.eName, E.empId, D.dname FROM Employee_List E LEFT JOIN Department_List D ON E.departId = D.deptId;
+
+
+saurabh|1|IT
+sneha|2|IT
+sneha|3|HR
+Priti|3|SALES
+Ashis|3|
+```
+
+### RIGHT JOIN
+
+Returns all rows from the right table, even if there’s no match in the left table.
+(SQLite doesn’t support RIGHT JOIN directly, but many DBs do.)
+
+### FULL OUTER JOIN
+
+Returns all rows when there is a match in one of the tables.
+Includes rows from both tables that don’t have matches in the other.
+
+### CROSS JOIN
+
+Returns a cartesian product: every row of the first table combined with every row of the second table
+
+- `SELECT E.eName, D.dname FROM Employee_List E  CROSS JOIN Department_List D;`
+
+```
+sqlite> SELECT E.eName, D.dname FROM Employee_List E  CROSS JOIN Department_List D;
+
+
+saurabh|IT
+saurabh|HR
+saurabh|SALES
+saurabh|SALES
+sneha|IT
+sneha|HR
+sneha|SALES
+sneha|SALES
+sneha|IT
+sneha|HR
+sneha|SALES
+sneha|SALES
+Priti|IT
+Priti|HR
+Priti|SALES
+Priti|SALES
+Ashis|IT
+Ashis|HR
+Ashis|SALES
+Ashis|SALES
+
+```
